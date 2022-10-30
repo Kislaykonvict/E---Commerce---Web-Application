@@ -1,7 +1,7 @@
 
 const categoryRepository = require("../dao/repository/category.repository");
 const errorConstants = require("../constants/ErrorConstants")
-const createCategory = (req, res) => {
+const addCategory = (req, res) => {
     const body = req.body;
 
     if(!body.name) {
@@ -10,7 +10,7 @@ const createCategory = (req, res) => {
         });
         return
     }
-    categoryRepository.createCategory({
+    categoryRepository.addCategory({
         name : body.name,
         description : body.description
     }).then((result) => {
@@ -76,7 +76,9 @@ const fetchCategoryByName = (req, res) => {
             name : req.params.name
         }
     })
-    .then(result => res.status(200).send(result))
+    .then(result => {
+        res.status(200).send(result)
+    })
     .catch(error => {
         res.status(500).send({
             message : "Error occured in proccessing your request. please try again after sometime!"
@@ -84,7 +86,7 @@ const fetchCategoryByName = (req, res) => {
     })
 }
 module.exports = {
-    create : createCategory,
+    create : addCategory,
     fetchAllCategories : fetchAllCategories,
     fetchCategoryByID : fetchCategoryByID,
     fetchCategoryByName : fetchCategoryByName

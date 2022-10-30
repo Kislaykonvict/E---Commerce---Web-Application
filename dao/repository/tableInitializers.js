@@ -1,5 +1,8 @@
-const categoryRepository = require("./category.repository")
+const {createCategoryTable} = require("./category.repository");
+const { createProductTable } = require("./product.repository");
 
 exports.initializeTables = (forceCreation) => {
-    categoryRepository.createCategoryTable(forceCreation);
+    createCategoryTable(forceCreation);
+    createProductTable(forceCreation);
+    
 }
