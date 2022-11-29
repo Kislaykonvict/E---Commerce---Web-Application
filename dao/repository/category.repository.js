@@ -29,7 +29,7 @@ const fetchCategoriesByCriteria = async(criteria) => {
 
 module.exports = {
     createCategoryTable : createCategoryTable,
-    createCategory : save,
+    addCategory : save,
     fetchCategoryByID : fetchCategoryByID,
     fetchAllCategories : fetchAllCategories,
     fetchCategoriesByCriteria : fetchCategoriesByCriteria

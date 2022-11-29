@@ -4,12 +4,6 @@ const errorConstants = require("../constants/ErrorConstants")
 const addCategory = (req, res) => {
     const body = req.body;
 
-    if(!body.name) {
-        res.status(404).send({
-            message : "Category name cannot be empty"
-        });
-        return
-    }
     categoryRepository.addCategory({
         name : body.name,
         description : body.description
@@ -17,7 +11,7 @@ const addCategory = (req, res) => {
         console.log(`Category name : ${body.name} has been created successfully!`);
         res.status(201).send(result);
     }).catch(error => {
-        if(error.name === 'SequelizeUniqueConstraintError') {
+        if(error.name === errorConstants.UNIQUE_KEY_CONSTRAINT_VALIDATION_ERROR) {
             console.log(error.errors[0]);
             res.status(400).send({
                 message : `${body.name} already exists!`
@@ -80,6 +74,7 @@ const fetchCategoryByName = (req, res) => {
         res.status(200).send(result)
     })
     .catch(error => {
+        console.log(error);
         res.status(500).send({
             message : "Error occured in proccessing your request. please try again after sometime!"
         })

@@ -20,7 +20,6 @@ exports.validateAddOrUpdateProductRequest = (req, res, next) => {
         return;
     }
     
-    
     if(!req.body.categoryId) {
         res.status(400).send({message : `CategoryId cannot be empty!`});
         return;
@@ -32,17 +31,3 @@ exports.validateAddOrUpdateProductRequest = (req, res, next) => {
     next();
 }
 
-exports.validateAddOrUpdateMultipleProductsRequest = (req, res, next) => {
-    if(!req.body.products) {
-        res.status(400).send({ message : `List of products cannot be empty!`});
-        return;
-    }
-    for(let product of req.body.products) {
-        if(!product.name || !product.categoryId) {
-
-            res.status(400).send({message : `Name or CategoryId cannot be empty!`});
-            return;
-        }
-    }
-    next();
-}

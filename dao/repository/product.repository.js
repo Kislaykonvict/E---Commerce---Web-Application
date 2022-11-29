@@ -21,27 +21,11 @@ const createProductTable = async (forceCreation) => {
 }
 
 const createProduct = async(product) => {
-    return await Product.create({
-        name : product.name,
-        description : product.description,
-        imageUrl : product.imageUrl,
-        price : product.price,
-        categoryId : product.categoryId
-    });
+    return await Product.create(product);
 }
 
-const  createMultipleProducts = async (products) => {
-    const validProducts = new Array();
-    for(let product of products) {
-        validProducts.push({
-            name : product.name,
-            description : product.description,
-            imageUrl : product.imageUrl,
-            price : product.price,
-            categoryId : product.categoryId
-        })
-    }
-    return await Product.bulkCreate(validProducts);
+const  createMultipleProducts = async (products) => {  
+    return await Product.bulkCreate(products);
 }
 const fetchProductById = async (id) => {
     return await Product.findByPk(id)

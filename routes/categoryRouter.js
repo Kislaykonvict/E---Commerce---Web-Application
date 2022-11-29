@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const categoryController = require("../controller/categoryController");
-const { validateAddOrUpdateCategoryRequest } = require('../requestValidator/requestValidator');
+const { validateAddOrUpdateCategoryRequest } = require('../middlewares/validation.middleware/requestValidator');
 
 router.post("/create", validateAddOrUpdateCategoryRequest, categoryController.create);
 router.get("/categories", categoryController.fetchAllCategories);

@@ -6,12 +6,6 @@ const createProduct = (req, res) => {
     //1. name should not be null
     //2. categoryId should not be null
     const body = req.body;
-    if(!body.name || !body.categoryId) {
-        res.status(400).send({
-            message : "Name or CategoryId cannot be null!"
-        })
-        return;
-    }
 
     productRepository.createProduct({
         name : body.name,
@@ -21,7 +15,7 @@ const createProduct = (req, res) => {
         categoryId : body.categoryId
     }).then(result => {
         console.log(`Product : ${body.name} has been created successfully!`)
-        res.status(200).send(result)
+        res.status(201).send(result)
     }).catch(error => {
         //1. Duplicate name
         if(error.name === errorConstants.UNIQUE_KEY_CONSTRAINT_VALIDATION_ERROR) {
@@ -51,7 +45,7 @@ const createProduct = (req, res) => {
     })
 
 }
-//Creating/adding multiple procuts at once.
+//Creating/adding multiple products at once.
 const createMultipleProducts = (req, res) => {
     const products = req.body.products;
     const validProducts = new Array();
@@ -74,9 +68,10 @@ const createMultipleProducts = (req, res) => {
     productRepository.createMultipleProducts(validProducts)
     .then(result => {
         console.log(`Multiple products have been created successfully!`)
-        res.status(200).send(result)
+        res.status(201).send(result)
     }).catch(error => {
-        res.status(400).send({
+        console.log(error.message)
+        res.status(500).send({
             message : `Error in creating multiple products. Please try again after sometimes.`
         })
     })
@@ -89,7 +84,7 @@ const fetchAllProducts = (req, res) => {
         res.status(200).send(result)
     })
     .catch(error => {
-        console.log(`Error in fetching all the products`)
+        console.log(`Error in fetching all the products ${error.message}`)
         res.status(500).send({
             message : `Error occured in processing the request, Please try again after sometime!`
         })
@@ -105,7 +100,7 @@ const fetchProductByName = (req, res) => {
         }
     }).then(result => res.status(200).send(result))
     .catch(error => {
-        //con
+        console.log(error.message);
         res.status(500).send({
             message : `Error occured in processing the request, Please try after sometime`
         });
@@ -123,6 +118,7 @@ const fetchProductById = (req, res) => {
         res.status(200).send(result)
     })
     .catch(error => {
+        console.log(error.message);
         res.status(500).send({
             message : `Error occured in processing the request, Please try after sometime!`
         })
@@ -180,7 +176,7 @@ const fetchProductsByCategoryId = (req, res) => {
     productRepository.fetchProductsByCriteria(criteria)
     .then(result => res.status(200).send(result))
     .catch(error => {
-        //con
+        console.log(error.message);
         res.status(500).send({
             message : `Error occured in processing the request, Please try after sometime!`
         });
@@ -202,7 +198,7 @@ const search = (req, res) => {
     criteria.where = {
         [Op.and] : likeKeywords
     }
-    console.log(criteria);
+    console.log(criteria);   
 
     productRepository.fetchProductsByCriteria(criteria)
     .then(result => res.status(200).send(result))

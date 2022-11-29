@@ -25,7 +25,7 @@ exports.defineProduct = (connection, DataTypes) => {
         },
         categoryId : {
            type : DataTypes.INTEGER,
-           allowNull : false 
+           allowNull : false      
         }
     });
     return product;
