@@ -1,8 +1,7 @@
 // Id, name, description, image, price, description;
 
-
 exports.defineProduct = (connection, DataTypes) => {
-    const product = connection.define('product', {
+    const Product = connection.define('product', {
         id : {
             type : DataTypes.INTEGER,
             primaryKey : true,
@@ -28,5 +27,5 @@ exports.defineProduct = (connection, DataTypes) => {
            allowNull : false      
         }
     });
-    return product;
+    return Product;
 }

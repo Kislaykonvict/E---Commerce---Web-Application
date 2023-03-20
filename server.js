@@ -28,5 +28,5 @@ app.listen(serverConfig.PORT, serverConfig.HOST, () => {
     //2. Initialize the databases if environment is development
     if(serverConfig.ENV === 'dev') {
         initializeTables(false)
-    }
+    }     
 })();   

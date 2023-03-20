@@ -8,7 +8,8 @@ exports.validateAccessToken = (req, res, next) => {
     //3. we have to add the user details in the req body.
 
     const authToken = req.headers['authorization'];
-    validateToken(authToken).then(result => {
+    validateToken(authToken)
+    .then(result => {
         if(result.status == 200) {
             console.log(`user validated Successfully!`);
             //decode the token and add the details to the req.user = payload

@@ -4,8 +4,8 @@
 Stores details related to the user
 userName, firstName, lastName, password, phoneNumber
 */
-exports.defineUser = (dbConnection, DataTypes) => {
-    const User = dbConnection.define('user', {
+exports.defineUser = (connection, DataTypes) => {
+    const User = connection.define('user', {
         id : {
             type : DataTypes.INTEGER,
             primaryKey : true,
@@ -36,5 +36,5 @@ exports.defineUser = (dbConnection, DataTypes) => {
             defaultValue : "NORMAL_USER"
         }
     });
-    return User;   
+    return User;
 }

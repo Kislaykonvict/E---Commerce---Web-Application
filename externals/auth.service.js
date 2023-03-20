@@ -16,13 +16,21 @@ const validateToken = async (userToken) => {
     // }
     return await axios.get('/auth/validate', { 
         headers : headers, 
-        validateStatus : (status) => {
+        validateStatus : (status) => {   
+            // Resolve only if the status code is less than 500
             return status < 500;
         }
     });
 }
 
+const deleteToken = async (bearerToken) => {
+    const headers = {
+        "Authorization" : bearerToken
+    }
+    return await axios.get('/auth/deleteUserToken', { headers })
+}
 module.exports = {
     getAuthToken : getAuthToken,
-    validateToken : validateToken
+    validateToken : validateToken,
+    deleteToken : deleteToken
 }

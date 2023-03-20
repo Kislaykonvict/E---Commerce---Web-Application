@@ -1,5 +1,5 @@
-const defineCategory = (conn, DataTypes) => {
-    const Category = conn.define("category", {
+const defineCategory = (connection, DataTypes) => {
+    const Category = connection.define("category", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,

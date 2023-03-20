@@ -15,9 +15,9 @@ const createProductTable = async (forceCreation) => {
     const category = defineCategory(dbConnection.connection, dbConnection.DataTypes);
     Product.belongsTo(category, {
         foreignKey : "categoryId",
-        targetKey : "id",
+        targetKey : "id"
     });
-    await Product.sync({ force : forceCreation});
+    await Product.sync({ force : forceCreation });
 }
 
 const createProduct = async(product) => {
@@ -37,10 +37,10 @@ const fetchAllProducts = async () => {
 
 const fetchProductsByCriteria = async (criteria) => {
     return await Product.findAll(criteria);
-}
-
+};
 
 module.exports = {
+    Product : Product,
     createProductTable : createProductTable,
     createProduct : createProduct,
     fetchAllProducts : fetchAllProducts,
